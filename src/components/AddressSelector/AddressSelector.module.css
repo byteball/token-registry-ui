@@ -1,0 +1,36 @@
+.option{
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.option:hover{
+    background: #002549;
+    color: #ffffff;
+}
+
+.select{
+    color: #fff;
+}
+
+.option:global(.ant-select-item-option-selected){
+    background: #002549;
+    color: #ffffff;
+}
+
+.option:global(.ant-select-item-option-active){
+    background-color: #002549;
+    color: #ffffff;
+}
+
+.dropdown{
+    max-width: 100%;
+    padding-top: 10px;
+    background-color: #001529;
+    color: #ffffff;
+}
+
+@media (max-width: 840px) {
+    .select{
+        display: none;
+    }
+}

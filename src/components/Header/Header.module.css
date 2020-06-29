@@ -1,0 +1,28 @@
+.header{
+    display: flex;
+    overflow: hidden;
+    position: fixed;
+    width: 100vw;
+    z-index: 99999;
+}
+
+.serviceName{
+    color: #fff;
+    font-size: 18px;
+    margin-right: 24px;
+    white-space: nowrap;
+}
+
+
+.selectWrap{
+}
+
+.menu{
+    width: 100%;
+}
+
+@media (max-width: 1200px){
+    .header{
+        z-index: 89;
+    }
+}

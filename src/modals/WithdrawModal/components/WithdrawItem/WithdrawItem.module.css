@@ -1,0 +1,36 @@
+.item{
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow-y: auto;
+    user-select: none;
+}
+
+.active{
+    background: #1890ff;
+    color: #ffffff;
+    border: none;
+}
+
+.address{
+    font-weight: bold;
+}
+
+.symbol span,.asset span,.drawer span,.support span{
+    font-weight: bold;
+}
+
+.expiry{
+    color: green;
+}
+
+.active .expiry{
+    color: #ffffff;
+}
+
+.drawerWrap{
+    display: flex;
+    justify-content: space-between;
+}

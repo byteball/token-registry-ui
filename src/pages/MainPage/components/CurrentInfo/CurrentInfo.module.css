@@ -1,0 +1,8 @@
+.currentInfo{
+    margin-top: 24px;
+    font-size: 16px;
+}
+
+.currentInfo a{
+    word-break: break-all;
+}
