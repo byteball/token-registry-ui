@@ -15,7 +15,7 @@ export const TokenHeader = () => {
   return (
     <div className={styles.tokenHeader}>
       <div className={styles.headerWrap}>
-        <div className={styles.assetOrSymbol}>
+        <div className={styles.symbolOrAsset}>
           {sidebarType === "symbols" ? (
             <b>Symbol</b>
           ) : (

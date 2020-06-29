@@ -27,7 +27,7 @@
     background-color: #F9F9F9;
 }
 
-.assetOrSymbol{
+.symbolOrAsset{
     width: 46%;
     text-overflow: ellipsis;
     /*text-transform: uppercase;*/

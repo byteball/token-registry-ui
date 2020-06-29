@@ -21,7 +21,7 @@ import {
   IWithdrawModal,
   IDataWithdraw,
 } from "./withdraw.interface";
-import { getStatusDrawer, TStatusDrawer } from "./utils/getStatusDrawer";
+import { getDrawerStatus, TStatusDrawer } from "./utils/getDrawerStatus";
 
 const { TabPane } = Tabs;
 
@@ -57,7 +57,7 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
     }
   };
 
-  let currentStatus: TStatusDrawer = useMemo(() => getStatusDrawer(active), [
+  let currentStatus: TStatusDrawer = useMemo(() => getDrawerStatus(active), [
     active,
   ]);
 

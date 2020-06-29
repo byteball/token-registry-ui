@@ -213,17 +213,6 @@ export const getData: ThunkActionWithArguments = () => async (
           }
       }
     }
-    // if (
-    //   drawers[drawer].drawer !== 0 &&
-    //   drawers[drawer].symbol &&
-    //   drawers[drawer].asset &&
-    //   drawers[drawer].support
-    // ) {
-    //   if (drawer in supportLinks) {
-    //     supportLinks[drawer].support = drawers[drawer];
-    //   }
-    // }
-    // console.log(currentDrawer);
   }
   dispatch({
     type: LOAD_DATA_SUCCESS,

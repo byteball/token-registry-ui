@@ -9,6 +9,7 @@ import { showAllDrawersOpen } from "store/actions/modals/showDrawers";
 import { editInfoOpen } from "store/actions/modals/editInfo";
 import { IDrawersAddress } from "store/reducers/data.interface";
 import { withdrawOpen } from "store/actions/modals/withdraw";
+import config from "config";
 
 export interface ICurrentInfo {
   currentSupport: number | undefined;
@@ -67,7 +68,7 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
         {asset ? (
           <a
             target="_blank"
-            href={`https://testnetexplorer.obyte.org/?#${asset}`}
+            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
           >
             {asset}
           </a>

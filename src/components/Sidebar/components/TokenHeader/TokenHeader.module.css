@@ -11,11 +11,11 @@
     justify-content: flex-start;
     width: 90%;
 }
-.assetOrSymbol{
+.symbolOrAsset{
     width: 46%;
 }
 
-.assetOrSymbol span{
+.symbolOrAsset span{
     cursor: pointer;
 }
 

@@ -11,7 +11,7 @@ import { ISelectorTabs } from "./SelectorTabs.interface";
 
 const { TabPane } = Tabs;
 
-const cutSymbolOrAsset = (symbolOrAsset: string, width: number) => {
+const truncateSymbolOrAsset = (symbolOrAsset: string, width: number) => {
   if (width <= 480) {
     if (symbolOrAsset.length >= 11) {
       return padEnd(symbolOrAsset.substring(0, 11), 14, "...");
@@ -52,16 +52,16 @@ export const SelectorTabs: React.FC<ISelectorTabs> = (props) => {
               isDispute={Boolean(
                 current.expiry_ts_symbol || current.expiry_ts_asset
               )}
-              cutAssetOrSymbol={
+              truncatedSymbolOrAsset={
                 props.sidebarType === "symbols"
-                  ? cutSymbolOrAsset(current.symbol, props.width)
-                  : cutSymbolOrAsset(current.currentAsset, props.width)
+                  ? truncateSymbolOrAsset(current.symbol, props.width)
+                  : truncateSymbolOrAsset(current.currentAsset, props.width)
               }
             />
           ))}
         </Scrollbar>
       </TabPane>
-      <TabPane tab="FAVOURITES" key="2" forceRender={true}>
+      <TabPane tab="FAVORITES" key="2" forceRender={true}>
         <TokenHeader />
         <Scrollbar
           style={{
@@ -76,10 +76,10 @@ export const SelectorTabs: React.FC<ISelectorTabs> = (props) => {
               isDispute={Boolean(
                 current.expiry_ts_symbol || current.expiry_ts_asset
               )}
-              cutAssetOrSymbol={
+              truncatedSymbolOrAsset={
                 props.sidebarType === "symbols"
-                  ? cutSymbolOrAsset(current.symbol, props.width)
-                  : cutSymbolOrAsset(current.currentAsset, props.width)
+                  ? truncateSymbolOrAsset(current.symbol, props.width)
+                  : truncateSymbolOrAsset(current.currentAsset, props.width)
               }
             />
           ))}
@@ -100,10 +100,10 @@ export const SelectorTabs: React.FC<ISelectorTabs> = (props) => {
               isDispute={Boolean(
                 current.expiry_ts_symbol || current.expiry_ts_asset
               )}
-              cutAssetOrSymbol={
+              truncatedSymbolOrAsset={
                 props.sidebarType === "symbols"
-                  ? cutSymbolOrAsset(current.symbol, props.width)
-                  : cutSymbolOrAsset(current.currentAsset, props.width)
+                  ? truncateSymbolOrAsset(current.symbol, props.width)
+                  : truncateSymbolOrAsset(current.currentAsset, props.width)
               }
             />
           ))}

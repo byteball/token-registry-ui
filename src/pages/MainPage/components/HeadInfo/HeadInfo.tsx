@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./HeadInfo.module.css";
 import { Statistic } from "antd";
+import config from "config";
+
 const { Countdown } = Statistic;
 export interface IHeadInfo {
   symbol: string;
@@ -25,7 +27,7 @@ export const HeadInfo: React.FC<IHeadInfo> = ({
         <div>
           <a
             target="_blank"
-            href={`https://testnetexplorer.obyte.org/?#${asset}`}
+            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
           >
             View current asset on explorer
           </a>

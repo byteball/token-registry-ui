@@ -10,7 +10,7 @@ import { ICurrentSymbol } from "store/selectors/interfaces/currentSymbol.interfa
 
 export interface ITokenItem {
   key: string;
-  cutAssetOrSymbol: string;
+  truncatedSymbolOrAsset: string;
   isDispute: boolean;
   sidebarType: "assets" | "symbols";
 
@@ -18,7 +18,7 @@ export interface ITokenItem {
 }
 
 export const TokenItem: React.FC<ITokenItem> = (props) => {
-  const { isDispute, cutAssetOrSymbol, sidebarType, current } = props;
+  const { isDispute, truncatedSymbolOrAsset, sidebarType, current } = props;
 
   const {
     symbol,
@@ -28,7 +28,7 @@ export const TokenItem: React.FC<ITokenItem> = (props) => {
     rivalSupport,
   } = current;
 
-  const assetOrSymbol = sidebarType === "assets" ? currentAsset : symbol;
+  const symbolOrAsset = sidebarType === "assets" ? currentAsset : symbol;
 
   const dispatch = useDispatch();
 
@@ -50,8 +50,8 @@ export const TokenItem: React.FC<ITokenItem> = (props) => {
         className={styles.itemWrap}
         onClick={() => dispatch(changeActiveSymbol(symbol))}
       >
-        <div className={styles.assetOrSymbol} title={assetOrSymbol}>
-          {cutAssetOrSymbol}
+        <div className={styles.symbolOrAsset} title={symbolOrAsset}>
+          {truncatedSymbolOrAsset}
         </div>
 
         <div className={styles.support}>

@@ -9,7 +9,7 @@ export type TStatusDrawer =
   | "lock"
   | undefined;
 
-export const getStatusDrawer = (drawer: IDrawer | {}): TStatusDrawer => {
+export const getDrawerStatus = (drawer: IDrawer | {}): TStatusDrawer => {
   const now = moment().unix();
   let currentStatus: TStatusDrawer = undefined;
 
