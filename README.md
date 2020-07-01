@@ -1,6 +1,6 @@
-# Token registry ui
+# Token registry UI
 
-Link to website: https://tokens.ooo
+Website: https://tokens.ooo, https://testnet.tokens.ooo
 
 ## Install
 
