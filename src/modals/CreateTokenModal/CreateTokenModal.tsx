@@ -146,7 +146,7 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
   return (
     <Modal
       visible={visible}
-      title="Create token"
+      title="Create token symbol"
       onOk={createTokenCheck}
       style={{ zIndex: -1 }}
       onCancel={handleCancel}

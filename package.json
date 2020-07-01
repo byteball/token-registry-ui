@@ -55,7 +55,6 @@
       ],
       "no-mixed-spaces-and-tabs": "error"
     }
-
   },
   "browserslist": {
     "production": [

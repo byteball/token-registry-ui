@@ -46,7 +46,7 @@ export const EditInfo: React.FC = () => {
 
   const urlWithData = useMemo(
     () =>
-      generateLink(0.0001 * 1e9, {
+      generateLink(1e4, {
         symbol,
         description,
         decimals,

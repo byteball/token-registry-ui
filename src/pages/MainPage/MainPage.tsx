@@ -58,7 +58,7 @@ export const MainPage: React.FC = () => {
     <MainLayout>
       {!activeWallet && (
         <Alert
-          message="To have more features in the app add your wallet"
+          message="To have more features in the app add your wallet address"
           type="warning"
           showIcon
           banner={true}
@@ -121,7 +121,7 @@ export const MainPage: React.FC = () => {
           )}
         </>
       ) : (
-        <div className={styles.placeholder}>Please, select token</div>
+        <div className={styles.placeholder}>Please select a token</div>
       )}
 
       {/*Modals*/}

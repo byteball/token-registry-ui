@@ -129,6 +129,7 @@ export const ChangeInfo: React.FC<IChangeInfo> = ({
           </Button>
         </div>
       </div>
+      <p>Voting/editing is available only to those who support the current symbol-asset connection.</p>
       <div>
         {widthWindow && widthWindow > 800 ? (
           <Table

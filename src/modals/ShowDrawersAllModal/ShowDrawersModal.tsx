@@ -49,7 +49,7 @@ export const ShowDrawersModal: React.FC<IShowDrawersAllModal> = ({
   return (
     <Modal
       visible={visible}
-      title={type === "all" ? "Support list" : "Support list in drawers"}
+      title={type === "all" ? "Supporters" : "Support in drawers"}
       style={{ zIndex: -1 }}
       onCancel={handleCancel}
       footer={[

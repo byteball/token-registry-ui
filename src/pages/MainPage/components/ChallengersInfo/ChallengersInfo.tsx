@@ -35,7 +35,11 @@ const columnsBySymbol = [
     },
   },
   {
-    title: "Support in drawers",
+    title: (
+      <Tooltip title="Support that is locked in drawers and cannot be quickly withdrawn">
+        <span style={{ borderBottom: "1px dotted #1890ff", cursor: "default" }}>Support in drawers</span>
+      </Tooltip>
+    ),
     dataIndex: "lockSupport",
     key: "lockSupport",
     render: (support: number) => {
@@ -90,7 +94,11 @@ const columnsByAsset = [
     },
   },
   {
-    title: "Support in drawers",
+    title: (
+      <Tooltip title="Support that is locked in drawers and cannot be quickly withdrawn">
+        <span style={{ borderBottom: "1px dotted #1890ff", cursor: "default" }}>Support in drawers</span>
+      </Tooltip>
+    ),
     dataIndex: "lockSupport",
     key: "lockSupport",
     render: (support: number) => {
@@ -148,7 +156,7 @@ export const ChallengersInfo: React.FC<IChallengersInfo> = ({
           alignItems: "center",
         }}
       >
-        <div style={{ fontSize: 26 }}>All links</div>
+        <div style={{ fontSize: 26 }}>All symbol-asset connections</div>
         {widthWindow && widthWindow < 800 && (
           <div>
             <Button

@@ -101,7 +101,7 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
           <Button onClick={() => dispatch(withdrawClose())}>Close</Button>
           {currentStatus === "free" && (
             <Button type="primary" onClick={() => setActiveWithdraw(true)}>
-              Withdraw
+              Withdraw...
             </Button>
           )}
           {currentStatus === "expiry" && (
