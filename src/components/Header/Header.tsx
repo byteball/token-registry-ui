@@ -9,7 +9,7 @@ const HeaderAnt = Layout.Header;
 export const Header: React.FC = () => {
   return (
     <HeaderAnt className={styles.header}>
-      <div className={styles.serviceName}>Token registry</div>
+      <div className={styles.serviceName}>Token registry<sup> beta</sup></div>
       <Menu
         theme="dark"
         mode="horizontal"
