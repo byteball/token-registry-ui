@@ -17,7 +17,7 @@ export default (
         return Promise.resolve();
       }
     } else {
-      error = "Min amount is 0.1 GBYTE";
+      error = `Min amount is ${minSupport} GBYTE`;
     }
   } else {
     error = "This field is not valid!";
