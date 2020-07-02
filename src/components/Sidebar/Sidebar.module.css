@@ -1,0 +1,53 @@
+.sider{
+    padding-top: 24px;
+    box-sizing: border-box;
+    min-height: calc( 100% - 64px);
+    z-index: 999;
+    position: fixed;
+    top:64px;
+}
+
+.siderWrap{
+    padding-left: 24px;
+    padding-right: 24px;
+    transition: 1s;
+}
+
+.selectorWrap{
+    margin-top: 48px;
+    user-select: none;
+}
+
+.overlay{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px){
+    .sider{
+        position: fixed;
+        left: 0;
+        top: 0;
+        border-right: 1px solid #ddd;
+        max-width: 100% !important;
+        min-width: 100% ;
+        height: 100%
+    }
+    .siderWrap{
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+:global(.ant-layout-sider-collapsed){
+    border-right: none !important;
+}

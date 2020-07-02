@@ -1,0 +1,31 @@
+.buttonLink{
+    color: #1890ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    -webkit-text-decoration-skip: objects;
+}
+
+.buttonLink:hover {
+    color: #40a9ff;
+}
+.buttonLink:active {
+    color: #096dd9;
+}
+.buttonLink:active,
+.buttonLink:hover {
+    text-decoration: none;
+    outline: 0;
+}
+.buttonLink:focus {
+    text-decoration: none;
+    outline: 0;
+}
+.buttonLink[disabled] {
+    color: rgba(0, 0, 0, 0.25);
+    cursor: not-allowed;
+    pointer-events: none;
+}

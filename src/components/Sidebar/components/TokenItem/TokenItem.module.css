@@ -1,0 +1,60 @@
+.tokenItem{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 0 5px;
+    border-bottom: 1px solid #F5F5F5;
+    cursor: pointer;
+    line-height: 25px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+.itemWrap{
+    display: flex;
+    justify-content: flex-start;
+    width: 90%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.tokenItem:last-child{
+    border-bottom: none;
+}
+
+.tokenItem:hover{
+    background-color: #F9F9F9;
+}
+
+.symbolOrAsset{
+    width: 46%;
+    text-overflow: ellipsis;
+    /*text-transform: uppercase;*/
+}
+
+.support{
+    width: 27%;
+}
+
+.rivalSupport{
+    width: 27%;
+}
+
+.rateWrap{
+    width: calc(10% - 10px);
+    display: flex;
+    justify-content: center;
+}
+
+.dispute{
+    color: red;
+}
+
+.notDispute{
+    color: green;
+}
+
+.scroll{
+    width: 10px;
+}

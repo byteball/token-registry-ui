@@ -1,0 +1,33 @@
+.headInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.symbol{
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.disputeTimeWrap{
+    text-align: right;
+}
+
+
+@media (max-width: 840px) {
+    .headInfo{
+        white-space: pre-wrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .disputeTimeWrap{
+        text-align: left;
+    }
+    .symbol{
+        font-size: 24px;
+    }
+    .symbolWrap{
+        margin-bottom: 24px;
+    }
+}

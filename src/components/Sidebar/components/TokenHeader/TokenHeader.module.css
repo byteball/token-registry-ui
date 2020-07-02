@@ -1,0 +1,38 @@
+.tokenHeader{
+    display: flex;
+    padding: 8px 13px 8px 5px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    background: #F9F9F9;
+    justify-content: flex-start;
+}
+.headerWrap{
+    display: flex;
+    justify-content: flex-start;
+    width: 90%;
+}
+.symbolOrAsset{
+    width: 46%;
+}
+
+.symbolOrAsset span{
+    cursor: pointer;
+}
+
+.support{
+    width: 27%;
+}
+
+.rivalSupport{
+    width: 27%;
+}
+
+.rate{
+    width: calc(10% - 10px);
+}
+
+@media (max-width: 780px) {
+    .tokenHeader{
+        font-size: 10px;
+    }
+}
