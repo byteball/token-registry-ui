@@ -137,7 +137,7 @@ export const ChangeInfo: React.FC<IChangeInfo> = ({
             // @ts-ignore
             columns={columns}
             size="small"
-            pagination={{ pageSize: 5 }}
+            pagination={{ pageSize: 5, hideOnSinglePage: true }}
             expandable={{ defaultExpandAllRows: true }}
             rowKey={(record: IDescriptionsByAsset) =>
               "discr-" + record.text! + record.decimals + record.support

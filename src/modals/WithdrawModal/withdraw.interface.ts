@@ -7,6 +7,7 @@ export interface IDataWithdraw {
   drawer?: number;
   move?: 1;
   amount?: number;
+  address?: string;
 }
 
 export interface IWithdrawModal {
