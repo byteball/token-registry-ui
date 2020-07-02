@@ -69,7 +69,7 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
     if ("symbol" in active) {
       data.symbol = active.symbol;
     }
-    if ("drawer" in active && currentStatus === "lock") {
+    if ("drawer" in active && (currentStatus === "lock" || (currentStatus === "expiry"))) {
       data.drawer = active.drawer;
     }
     if (
@@ -82,11 +82,11 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
         data = { ...data, amount };
       }
     } else if (currentStatus === "expiry") {
-      data = { ...data, move: 1 };
+      data = { ...data, move: 1, address: currentAddress };
     }
   }
 
-  const urlWithData = useMemo(() => generateLink(1e8, data, currentAddress), [
+  const urlWithData = useMemo(() => generateLink( 1e4, data, currentAddress), [
     data,
     currentAddress,
   ]);
@@ -183,7 +183,8 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
                       "support" in active &&
                       active.support !== undefined
                       ? active.support / 1e9
-                      : undefined
+                      : undefined,
+                    0
                   ),
               },
             ]}

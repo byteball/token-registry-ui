@@ -192,7 +192,7 @@ export const ChallengersInfo: React.FC<IChallengersInfo> = ({
                   "dis-asset-" + record.asset! + record.symbol + record.support
                 }
                 size="small"
-                pagination={{ pageSize: 5 }}
+                pagination={{ pageSize: 5, hideOnSinglePage: true}}
               />
             ) : (
               <ChallengersInfoList data={challengers.bySymbol} />
@@ -217,7 +217,7 @@ export const ChallengersInfo: React.FC<IChallengersInfo> = ({
                   "dis-symbol-" + record.asset! + record.symbol + record.support
                 }
                 size="small"
-                pagination={{ pageSize: 3 }}
+                pagination={{ pageSize: 5, hideOnSinglePage: true }}
               />
             ) : (
               <ChallengersInfoList data={challengers.byAsset} />
