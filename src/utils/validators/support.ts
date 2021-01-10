@@ -2,12 +2,14 @@ export default (
   value: string,
   onSuccess?: () => any,
   onError?: () => any,
-  maxValue?: number
+  maxValue?: number,
+  minValue?: number
 ) => {
   let error = null;
   const reg = /^[0-9.]+$/g;
+  const minSupport = minValue !== undefined ? minValue : 0.1;
   if (reg.test(value)) {
-    if (Number(value) >= 0.1) {
+    if (Number(value) >= minSupport) {
       if (maxValue && Number(value) > maxValue) {
         error = `Max amount is ${maxValue} GBYTE`;
       } else {
@@ -15,7 +17,7 @@ export default (
         return Promise.resolve();
       }
     } else {
-      error = "Min amount is 0.1 GBYTE";
+      error = `Min amount is ${minSupport} GBYTE`;
     }
   } else {
     error = "This field is not valid!";

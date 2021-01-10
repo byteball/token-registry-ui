@@ -11,7 +11,8 @@ export const validator = (
   type: typeFields,
   onSuccess: () => any,
   onError: () => any,
-  maxValue?: number
+  maxValue?: number,
+  minValue?: number
 ) => {
   switch (type) {
     case "symbol": {
@@ -54,7 +55,8 @@ export const validator = (
         value,
         onSuccess ? () => onSuccess() : undefined,
         onError ? () => onError() : undefined,
-        maxValue
+        maxValue,
+        minValue
       );
     }
   }

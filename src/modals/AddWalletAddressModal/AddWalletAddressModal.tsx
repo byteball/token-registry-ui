@@ -85,6 +85,11 @@ export const AddWalletAddressModal: React.FC = () => {
             onChange={handleChange}
             ref={addressInput}
             autoFocus={true}
+            onKeyPress={(ev: React.KeyboardEvent) => {
+              if (ev.key === "Enter") {
+                handleAdd(address.value);
+              }
+            }}
           />
         </Form.Item>
       </Form>
