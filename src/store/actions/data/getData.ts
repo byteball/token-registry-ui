@@ -36,7 +36,7 @@ export const getData: ThunkActionWithArguments = () => async (
   let data: IStateVars = {};
 
   try {
-    let lastKey = "0";
+    let lastKey = "";
     while (true) {
       const chunkData = (await socket.api.getAaStateVars({
         address: config.ADDRESS,
