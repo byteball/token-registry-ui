@@ -36,9 +36,20 @@ export const getData: ThunkActionWithArguments = () => async (
   let data: IStateVars = {};
 
   try {
-    data = (await socket.api.getAaStateVars({
-      address: config.ADDRESS,
-    })) as IStateVars;
+    let lastKey = "";
+    while (true) {
+      const chunkData = (await socket.api.getAaStateVars({
+        address: config.ADDRESS,
+        var_prefix_from: lastKey
+      })) as IStateVars;
+      const keys = Object.keys(chunkData);
+      if (keys.length > 1) {
+        data = {...data, ...chunkData};
+        lastKey = keys[keys.length - 1];
+      } else {
+        break;
+      }
+    }
   } catch (e) {
     console.log("Error: ", e);
     return dispatch({
@@ -56,7 +67,6 @@ export const getData: ThunkActionWithArguments = () => async (
       const asset = row.split("_").slice(3)[0];
       if (!(asset in assets)) assets[asset] = {};
       assets[asset].largestSymbol = data[row];
-      // 13
     } else if (row.includes("by_largest_s2a_")) {
       const dataRow = row.split("_").slice(3);
       let oSymbol = [];
@@ -66,12 +76,10 @@ export const getData: ThunkActionWithArguments = () => async (
       const symbol = oSymbol.join("_");
       if (!(symbol in symbols)) symbols[symbol] = {};
       symbols[symbol].largestAsset = data[row];
-      // 12
     } else if (row.includes("a2s_")) {
       const asset = row.split("_").slice(1)[0];
       if (!(asset in assets)) assets[asset] = {};
       assets[asset].currentSymbol = data[row];
-      //  11
     } else if (row.includes("s2a_")) {
       const dataRow = row.split("_").slice(1);
       let oSymbol = [];
@@ -81,14 +89,11 @@ export const getData: ThunkActionWithArguments = () => async (
       const symbol = oSymbol.join("_");
       if (!(symbol in symbols)) symbols[symbol] = {};
       symbols[symbol].currentAsset = data[row];
-      //  10
     } else if (row.includes("decimals_")) {
       const hash = row.split("_").slice(1)[0];
       const decimals: number = Number(data[row]);
       if (!(hash in descriptions)) descriptions[hash] = {};
       descriptions[hash].decimals = decimals;
-
-      // 9
     } else if (row.includes("desc_support_")) {
       const assetAndHash = row.split("_").slice(2);
       const [asset, hash] = assetAndHash;
@@ -101,19 +106,15 @@ export const getData: ThunkActionWithArguments = () => async (
         ...descriptions[hash].support,
         [asset]: support,
       };
-      // 5
     } else if (row.includes("current_desc_")) {
       const asset = row.split("_").slice(2)[0];
       if (!(asset in assets)) assets[asset] = {};
       assets[asset].currentDescHash = data[row];
-      //  7
     } else if (row.includes("desc_choice_")) {
-      // 4
     } else if (row.includes("desc_")) {
       const hash = row.split("_").slice(1)[0];
       if (!(hash in descriptions)) descriptions[hash] = {};
       descriptions[hash].text = data[row];
-      //  8
     } else if (row.includes("support_")) {
       const symbAndAsset = row.split("_").slice(1);
       const asset = symbAndAsset[symbAndAsset.length - 1];
@@ -125,8 +126,6 @@ export const getData: ThunkActionWithArguments = () => async (
       const link = symbol + "_" + asset;
       if (!(link in supportLinks)) supportLinks[link] = {};
       supportLinks[link] = { support: Number(data[row]), asset, symbol };
-
-      //  2
     } else if (row.includes("balance_")) {
       const AdrAndAsset = row.split("_").slice(1);
       const [address, asset] = AdrAndAsset;
@@ -136,7 +135,6 @@ export const getData: ThunkActionWithArguments = () => async (
         ...assets[asset].balances,
         [address]: balance,
       };
-      //  3
     } else if (row.includes("grace_expiry_ts_")) {
       const asset = row.split("_").slice(3)[0];
       if (!(asset in assets)) assets[asset] = {};
