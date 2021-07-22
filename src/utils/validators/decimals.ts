@@ -1,7 +1,7 @@
 export default (value: string, onSuccess?: () => any, onError?: () => any) => {
   let error = null;
   const reg = /^[0-9]+$/g;
-  if (reg.test(value) || value === "") {
+  if (reg.test(value)) {
     if (Number(value) >= 0 && Number(value) <= 15) {
       onSuccess && onSuccess();
       return Promise.resolve();
@@ -11,6 +11,8 @@ export default (value: string, onSuccess?: () => any, onError?: () => any) => {
   } else {
     if (value.length > 0) {
       error = "Decimals field is not valid!";
+    } else {
+      error = "Decimals field is required!";
     }
   }
   onError && onError();

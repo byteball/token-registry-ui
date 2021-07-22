@@ -132,7 +132,8 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
   const isValidData =
     formValid.support &&
     formValid.drawer &&
-    (formValid.decimals || !decimals || decimals.length === "");
+    formValid.decimals &&
+    formValid.description;
 
   const urlWithData = useMemo(
     () => generateLink(support * 1e9, data, activeWallet),
@@ -162,6 +163,7 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
               onClick={() => {
                 dispatch(createTokenClear());
                 resetFields();
+                clearValid();
               }}
             >
               Reset
