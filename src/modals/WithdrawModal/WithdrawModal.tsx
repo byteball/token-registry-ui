@@ -44,12 +44,17 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
 
   const { resetFields } = formInstance;
 
+  const [active, setActive] = useState<IDrawer | {}>({});
+  const { visible } = withdrawStore;
+
   useEffect(() => {
     resetFields();
   }, [isActiveWithdraw, resetFields]);
 
-  const [active, setActive] = useState<IDrawer | {}>({});
-  const { visible } = withdrawStore;
+  useEffect(() => {
+    setActive({});
+    setAmount(0);
+  }, [visible]);
 
   const handleChangeActive = (item: IDataDrawer) => {
     if (!isEqual(item, active)) {
@@ -95,6 +100,8 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
     <Modal
       title="Withdraw support"
       visible={visible}
+      destroyOnClose={true}
+      forceRender={true}
       onCancel={() => dispatch(withdrawClose())}
       footer={
         <Space>
