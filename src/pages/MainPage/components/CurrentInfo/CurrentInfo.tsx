@@ -80,7 +80,7 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
       <div>
         <Space size="large">
           <div>
-            <b>Decimals:</b> {decimals || "-"}
+            <b>Decimals:</b> {decimals !== undefined ? decimals : "-"}
           </div>
           <div>
             <b>Status:</b>{" "}
