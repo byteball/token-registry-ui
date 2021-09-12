@@ -132,8 +132,8 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
   const isValidData =
     formValid.support &&
     formValid.drawer &&
-    formValid.decimals &&
-    formValid.description;
+    ((formValid.decimals &&
+      formValid.description) || !(check === "free"));
 
   const urlWithData = useMemo(
     () => generateLink(support * 1e9, data, activeWallet),
