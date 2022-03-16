@@ -22,6 +22,7 @@ import {
   IDataWithdraw,
 } from "./withdraw.interface";
 import { getDrawerStatus, TStatusDrawer } from "./utils/getDrawerStatus";
+import QRButton from "obyte-qr-button";
 
 const { TabPane } = Tabs;
 
@@ -112,22 +113,22 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
             </Button>
           )}
           {currentStatus === "expiry" && (
-            <a
-              className="ant-btn ant-btn-primary"
+            <QRButton
               key="move"
+              type="primary"
               href={urlWithData}
             >
               Move support
-            </a>
+            </QRButton>
           )}
           {currentStatus === "lock" && (
-            <a
-              className="ant-btn ant-btn-primary"
+            <QRButton
               key="move"
+              type="primary"
               href={urlWithData}
             >
               Unlock drawer
-            </a>
+            </QRButton>
           )}
         </Space>
       }
@@ -161,8 +162,8 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
         footer={
           <Space>
             <Button onClick={() => setActiveWithdraw(false)}>Close</Button>
-            <a
-              className="ant-btn ant-btn-primary"
+            <QRButton
+              type="primary"
               key="move"
               // @ts-ignore
               disabled={amount === 0}
@@ -170,7 +171,7 @@ export const WithdrawModal: React.FC<IWithdrawModal> = ({
               onClick={() => setActiveWithdraw(false)}
             >
               Withdraw
-            </a>
+            </QRButton>
           </Space>
         }
       >
