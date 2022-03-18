@@ -1,4 +1,4 @@
-import { Button, Space } from "antd";
+import { Button, Space, Typography } from "antd";
 import React from "react";
 import { useWindowSize } from "hooks/useWindowSize";
 import { ButtonLink } from "components/ButtonLink/ButtonLink";
@@ -10,6 +10,8 @@ import { editInfoOpen } from "store/actions/modals/editInfo";
 import { IDrawersAddress } from "store/reducers/data.interface";
 import { withdrawOpen } from "store/actions/modals/withdraw";
 import config from "config";
+
+const { Text } = Typography;
 
 export interface ICurrentInfo {
   currentSupport: number | undefined;
@@ -66,12 +68,16 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
       <div>
         <b>Current asset:</b>{" "}
         {asset ? (
-          <a
-            target="_blank" rel="noopener"
-            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
-          >
-            {asset}
-          </a>
+          <Text copyable={{
+            text: asset
+          }}>
+            <a
+              target="_blank" rel="noopener"
+              href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
+            >
+              {asset}
+            </a>
+          </Text>
         ) : (
           "-"
         )}

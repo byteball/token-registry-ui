@@ -21,6 +21,7 @@
     "lodash.throttle": "^4.1.1",
     "moment": "^2.25.3",
     "obyte": "^0.1.8",
+    "obyte-qr-button": "0.0.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

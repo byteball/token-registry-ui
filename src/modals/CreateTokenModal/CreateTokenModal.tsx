@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Button, Form, Input, Modal, Select, Alert, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import QRButton from "obyte-qr-button";
 import { Rule } from "antd/lib/form";
 import { FieldData, Callbacks } from "rc-field-form/lib/interface";
 
@@ -140,10 +141,6 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
     [activeWallet, data, support]
   );
 
-  const handleSend = () => {
-    handleCancel();
-  };
-
   return (
     <Modal
       visible={visible}
@@ -179,16 +176,15 @@ export const CreateTokenModal: React.FC<ICreateTokenModal> = ({
                 Check
               </Button>
             ) : (
-              <a
-                className="ant-btn ant-btn-primary"
+              <QRButton
+                type="primary"
                 key="create"
-                onClick={handleSend}
                 // @ts-ignore
                 disabled={!isValidData}
                 href={urlWithData}
               >
                 {check === "link" ? "Add support" : "Create"}
-              </a>
+              </QRButton>
             )}
           </Space>
         </>

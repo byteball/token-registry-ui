@@ -11,6 +11,7 @@ import { store } from "index";
 import { editInfoOpen } from "store/actions/modals/editInfo";
 import { generateLink } from "utils/generateLink";
 import { ChangeInfoList } from "./components/ChangeInfoList";
+import QRButton from "obyte-qr-button";
 
 export interface IChangeInfo {
   readonly currentAsset: string;
@@ -56,14 +57,15 @@ export const ChangeInfo: React.FC<IChangeInfo> = ({
     {
       title: "Action",
       key: "action",
-      width: 200,
+      width: 250,
       render: (text: string, record: IDescriptionsByAsset) => {
         return (
           <Space>
-            <a
+            <QRButton
               type="link"
               // @ts-ignore
               disabled={!isActive}
+              size="small"
               href={generateLink(
                 0.001 * 1e9,
                 {
@@ -75,7 +77,7 @@ export const ChangeInfo: React.FC<IChangeInfo> = ({
               )}
             >
               Vote
-            </a>
+            </QRButton>
             <ButtonLink
               type="link"
               disabled={!isActive}

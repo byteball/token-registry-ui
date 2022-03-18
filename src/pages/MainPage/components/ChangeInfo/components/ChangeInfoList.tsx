@@ -5,6 +5,7 @@ import { IDescriptionsByAsset } from "store/selectors/getDescriptionsByAsset";
 import { generateLink } from "utils/generateLink";
 import { editInfoOpen } from "store/actions/modals/editInfo";
 import { useDispatch } from "react-redux";
+import QRButton from "obyte-qr-button";
 
 export interface IChangeInfoList {
   data: IDescriptionsByAsset[];
@@ -39,7 +40,7 @@ export const ChangeInfoList: React.FC<IChangeInfoList> = ({
           </div>
           <div>
             <Space size="middle">
-              <a
+              <QRButton
                 type="link"
                 // @ts-ignore
                 disabled={!isActive}
@@ -54,7 +55,7 @@ export const ChangeInfoList: React.FC<IChangeInfoList> = ({
                 )}
               >
                 Vote
-              </a>
+              </QRButton>
               <ButtonLink
                 type="link"
                 disabled={!isActive}
