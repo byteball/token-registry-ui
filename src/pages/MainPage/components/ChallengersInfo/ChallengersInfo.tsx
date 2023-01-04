@@ -1,4 +1,4 @@
-import { Button, Table, Tabs, Tooltip } from "antd";
+import { Button, Table, Tabs, Tooltip, Typography } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createTokenOpen } from "store/actions/modals/createToken";
@@ -9,7 +9,9 @@ import { store } from "index";
 import { addSupportOpen } from "store/actions/modals/addSupport";
 import { ButtonLink } from "components/ButtonLink/ButtonLink";
 import { ChallengersInfoList } from "./components/ChallengersInfoList/ChallengersInfoList";
+
 const { TabPane } = Tabs;
+const { Text } = Typography;
 
 const columnsBySymbol = [
   {
@@ -80,6 +82,9 @@ const columnsByAsset = [
     ),
     dataIndex: "asset",
     key: "asset",
+    render: (asset: string) => {
+      return <Text copyable={true}>{asset}</Text>;
+    }
   },
   {
     title: "Сurrent support",

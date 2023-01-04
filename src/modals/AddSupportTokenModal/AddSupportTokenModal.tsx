@@ -9,7 +9,7 @@ import { generateLink } from "../../utils/generateLink";
 import { typeFields } from "../../global.interface";
 import { validator } from "../../utils/validators";
 import { Rule } from "antd/lib/form";
-import { redirect } from "../../utils/redirect";
+import QRButton from "obyte-qr-button";
 
 const { Option } = Select;
 const { useForm } = Form;
@@ -68,12 +68,6 @@ export const AddSupportTokenModal: React.FC<IAddSupportTokenModal> = ({
     [data, support, activeWallet]
   );
 
-  const handleSend = (ev: React.MouseEvent<HTMLElement>) => {
-    ev.preventDefault();
-    redirect(urlWithData);
-    handleCancel();
-  };
-
   const validateValue = (value: string, type: typeFields) =>
     validator(
       value,
@@ -99,16 +93,14 @@ export const AddSupportTokenModal: React.FC<IAddSupportTokenModal> = ({
           <Button key="close" onClick={handleCancel}>
             Close
           </Button>
-          <a
-            className="ant-btn ant-btn-primary"
+          <QRButton
+            type="primary"
             key="addSupport"
-            onClick={handleSend}
-            // @ts-ignore
             disabled={!isValidData}
             href={urlWithData}
           >
             Add support
-          </a>
+          </QRButton>
         </Space>
       }
     >
