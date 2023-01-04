@@ -140,7 +140,7 @@ export const getData: ThunkActionWithArguments = () => async (
       if (!(asset in assets)) assets[asset] = {};
       assets[asset].grace_expiry_ts = Number(data[row]);
     } else if (row.includes("_expiry_ts")) {
-      const dataRow = row.split("_").slice(0, 4);
+      const dataRow = row.split("_").slice(0, -2);
       const address = dataRow[0];
       const drawer = dataRow[1];
       const asset = dataRow[dataRow.length - 1];
