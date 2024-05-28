@@ -10,6 +10,8 @@ import { editInfoOpen } from "store/actions/modals/editInfo";
 import { IDrawersAddress } from "store/reducers/data.interface";
 import { withdrawOpen } from "store/actions/modals/withdraw";
 import config from "config";
+import { IIssuer } from "store/reducers/issuers.interface";
+import { Spin } from "antd";
 
 const { Text } = Typography;
 
@@ -24,6 +26,7 @@ export interface ICurrentInfo {
   drawers: IDrawersAddress;
   activeWallet: string | undefined;
   isActive?: boolean;
+  issuer: IIssuer | undefined;
 }
 
 export const CurrentInfo: React.FC<ICurrentInfo> = ({
@@ -36,6 +39,7 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
   drawerSupport,
   activeWallet,
   isActive,
+  issuer,
 }) => {
   const dispatch = useDispatch();
   const [width] = useWindowSize();
@@ -83,6 +87,37 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
         )}
       </div>
 
+      {issuer ? <>
+        {issuer.isAa && <>
+          {issuer.homepage_url ? <div><b>Asset issuer website:</b>{" "}
+            <a target="_blank" rel="noopener" href={issuer.homepage_url}
+            >
+              {issuer.description || issuer.address}
+            </a>
+          </div> : null}
+
+          {issuer.source_url ? <div><b>Issuer AA source code:</b>{" "}
+            <a href={issuer.source_url} target="_blank" rel="noopener">{issuer.source_url}</a>
+          </div> : null}
+        </>}
+
+        <div>
+          <b>Issuer address:</b>{" "}
+
+          <Text copyable={{
+            text: issuer.address
+          }}>
+            <a
+              target="_blank" rel="noopener"
+              href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/address/${issuer.address}`}
+            >
+              {issuer.address}
+            </a>
+          </Text>
+        </div>
+      </> : <div>
+        <Spin />
+      </div>}
       <div>
         <Space size="large">
           <div>

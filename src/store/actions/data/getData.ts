@@ -16,11 +16,14 @@ import {
 } from "store/reducers/data.interface";
 import { regSymbol } from "../../../utils/regSymbol";
 
+import { addIssuer } from "../issuers/addIssuer";
+import { IStore } from "store/reducers/index.interface";
+
 export interface IStateVars {
   [key: string]: string;
 }
 
-export const getData: ThunkActionWithArguments = () => async (
+export const getData: ThunkActionWithArguments = (firstCall: boolean = false) => async (
   dispatch,
   getState,
   socket
@@ -216,4 +219,10 @@ export const getData: ThunkActionWithArguments = () => async (
     type: LOAD_DATA_SUCCESS,
     payload: { drawers, symbols, assets, descriptions, supportLinks },
   });
+
+  const state = getState() as IStore;
+
+  if (firstCall && state.active && symbols[state.active].currentAsset) {
+    dispatch(addIssuer(symbols[state.active].currentAsset));
+  }
 };

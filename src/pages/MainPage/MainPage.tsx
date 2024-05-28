@@ -11,6 +11,8 @@ import { CreateTokenModal } from "modals/CreateTokenModal/CreateTokenModal";
 import { AddSupportTokenModal } from "modals/AddSupportTokenModal/AddSupportTokenModal";
 import { ShowDrawersModal } from "modals/ShowDrawersAllModal/ShowDrawersModal";
 import { getTokenInfoBySymbol } from "store/selectors/getTokenInfoBySymbol";
+import { getCurrentAssetIssuer } from "store/selectors/getCurrentAssetIssuer";
+
 import { Loader } from "components/Loader/Loader";
 import { useWindowSize } from "hooks/useWindowSize";
 
@@ -40,6 +42,10 @@ export const MainPage: React.FC = () => {
 
   const tokenInfo = useSelector((state: IStore) =>
     getTokenInfoBySymbol(state, active)
+  );
+
+  const currentAssetIssuer = useSelector((state: IStore) =>
+    getCurrentAssetIssuer(state, tokenInfo && tokenInfo.currentAsset)
   );
 
   useEffect(() => {
@@ -76,6 +82,7 @@ export const MainPage: React.FC = () => {
             width={width}
           />
           <CurrentInfo
+            issuer={currentAssetIssuer}
             currentSupport={tokenInfo.currentSupport}
             drawerSupport={tokenInfo.drawerSupport}
             description={tokenInfo.currentDescription}
@@ -87,10 +94,10 @@ export const MainPage: React.FC = () => {
             activeWallet={activeWallet}
             isActive={Boolean(
               activeWallet &&
-                tokenInfo.currentAsset &&
-                assets &&
-                "balances" in assets[tokenInfo.currentAsset] &&
-                activeWallet in assets[tokenInfo.currentAsset].balances!
+              tokenInfo.currentAsset &&
+              assets &&
+              "balances" in assets[tokenInfo.currentAsset] &&
+              activeWallet in assets[tokenInfo.currentAsset].balances!
             )}
           />
           {tokenInfo.symbol && tokenInfo.currentAsset && (
@@ -102,21 +109,21 @@ export const MainPage: React.FC = () => {
               />
               {(!!tokenInfo.currentDescription ||
                 !!tokenInfo.currentDecimals) && (
-                <ChangeInfo
-                  currentAsset={tokenInfo.currentAsset}
-                  currentSymbol={tokenInfo.symbol}
-                  description={tokenInfo.currentDescription}
-                  decimals={tokenInfo.currentDecimals}
-                  activeWallet={activeWallet}
-                  widthWindow={width}
-                  isActive={Boolean(
-                    activeWallet &&
+                  <ChangeInfo
+                    currentAsset={tokenInfo.currentAsset}
+                    currentSymbol={tokenInfo.symbol}
+                    description={tokenInfo.currentDescription}
+                    decimals={tokenInfo.currentDecimals}
+                    activeWallet={activeWallet}
+                    widthWindow={width}
+                    isActive={Boolean(
+                      activeWallet &&
                       assets &&
                       "balances" in assets[tokenInfo.currentAsset] &&
                       activeWallet in assets[tokenInfo.currentAsset].balances!
-                  )}
-                />
-              )}
+                    )}
+                  />
+                )}
             </>
           )}
         </>
