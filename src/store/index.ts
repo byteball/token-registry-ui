@@ -5,6 +5,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import { dataReducer } from "./reducers/data";
 import { modalsReducer } from "./reducers/modals";
 import { settingsReducer } from "./reducers/settings";
+import { issuersReducer } from "./reducers/issuers";
 
 import socket from "../services/socket";
 import { activeReducer } from "./reducers/active";
@@ -14,12 +15,13 @@ const rootReducer = combineReducers({
   data: dataReducer,
   modals: modalsReducer,
   settings: settingsReducer,
+  issuers: issuersReducer,
 });
 
 const persistConfig = {
   key: "tokens",
   storage,
-  whitelist: ["settings", "active"],
+  whitelist: ["settings", "active", "issuers"],
 };
 
 declare global {
