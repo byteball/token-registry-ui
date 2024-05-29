@@ -14,7 +14,6 @@ const client: obyte.Client = new obyte.Client(
 client.onConnect(() => {
   store.dispatch(openConnection());
 
-  store.dispatch(getData(true));
   const heartbeat = setInterval(function () {
     client?.api.heartbeat();
   }, 10 * 1000);

@@ -19,11 +19,13 @@ import { regSymbol } from "../../../utils/regSymbol";
 import { addIssuer } from "../issuers/addIssuer";
 import { IStore } from "store/reducers/index.interface";
 
+import httpClient from "services/httpClient";
+
 export interface IStateVars {
   [key: string]: string;
 }
 
-export const getData: ThunkActionWithArguments = (firstCall: boolean = false) => async (
+export const getData: ThunkActionWithArguments = (firstCall: boolean = false, isHttp: boolean = false) => async (
   dispatch,
   getState,
   socket
@@ -32,22 +34,33 @@ export const getData: ThunkActionWithArguments = (firstCall: boolean = false) =>
     type: LOAD_DATA_REQUEST,
   });
 
-  await socket.justsaying("light/new_aa_to_watch", {
-    aa: config.ADDRESS,
-  });
+  if (!isHttp) {
+    await socket.justsaying("light/new_aa_to_watch", {
+      aa: config.ADDRESS,
+    });
+  }
 
   let data: IStateVars = {};
 
   try {
     let lastKey = "";
+
     while (true) {
-      const chunkData = (await socket.api.getAaStateVars({
-        address: config.ADDRESS,
-        var_prefix_from: lastKey
-      })) as IStateVars;
+      let chunkData: IStateVars = {};
+
+      if (isHttp) {
+        chunkData = await httpClient.getAaStateVars(config.ADDRESS, undefined, lastKey) as IStateVars;
+      } else {
+        chunkData = (await socket.api.getAaStateVars({
+          address: config.ADDRESS,
+          var_prefix_from: lastKey
+        })) as IStateVars;
+      }
+
       const keys = Object.keys(chunkData);
+
       if (keys.length > 1) {
-        data = {...data, ...chunkData};
+        data = { ...data, ...chunkData };
         lastKey = keys[keys.length - 1];
       } else {
         break;
@@ -223,6 +236,6 @@ export const getData: ThunkActionWithArguments = (firstCall: boolean = false) =>
   const state = getState() as IStore;
 
   if (firstCall && state.active && symbols[state.active].currentAsset) {
-    dispatch(addIssuer(symbols[state.active].currentAsset));
+    dispatch(addIssuer(symbols[state.active].currentAsset, isHttp));
   }
 };

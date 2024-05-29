@@ -11,6 +11,7 @@ export const issuersReducer = (
 	switch (action.type) {
 		case ADD_ISSUER_INFO: {
 			const { asset, issuerInfo, ts } = action.payload;
+
 			if (asset) {
 				return ({
 					...state, [asset]: {
@@ -18,10 +19,12 @@ export const issuersReducer = (
 						ts
 					}
 				});
+			} else {
+				console.error("error: No asset provided");
+				return state;
 			}
-		}
-		default: {
+		};
+		default:
 			return state;
-		}
 	}
 };

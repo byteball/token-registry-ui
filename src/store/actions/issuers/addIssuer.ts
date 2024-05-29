@@ -1,6 +1,7 @@
 import { IStore } from "store/reducers/index.interface";
 import { ThunkActionWithArguments } from "./../index.interface";
 import { ADD_ISSUER_INFO } from "../../types/issuers";
+import httpClient from "services/httpClient";
 
 interface IDocFileInfo {
     description?: string;
@@ -9,7 +10,7 @@ interface IDocFileInfo {
 }
 
 
-export const addIssuer: ThunkActionWithArguments = (asset: string) => async (
+export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = false) => async (
     dispatch,
     getState,
     socket
@@ -22,12 +23,24 @@ export const addIssuer: ThunkActionWithArguments = (asset: string) => async (
     if (!issuers[asset] || ((issuers[asset].ts + 1000 * 60 * 24 * 7) < Date.now())) { // a week
 
         try {
-            const author = await socket.api.getJoint(asset).then((data: any) => data.joint.unit?.authors[0]?.address);
+            let author;
+
+            if (isHttp) {
+                author = await httpClient.getJoint(asset).then((joint: any) => joint.unit?.authors[0]?.address);
+            } else {
+                author = await socket.api.getJoint(asset).then((data: any) => data.joint.unit?.authors[0]?.address);
+            }
 
             if (author) {
-                const definition = await socket.api.getDefinition(author);
-                let docFile;
+                let definition;
 
+                if (isHttp) {
+                    definition = await httpClient.getDefinition(author);
+                } else {
+                    definition = await socket.api.getDefinition(author);
+                }
+
+                let docFile;
 
                 if (definition[0] && definition[0] === "autonomous agent") {
                     let address: string = author;
@@ -37,7 +50,13 @@ export const addIssuer: ThunkActionWithArguments = (asset: string) => async (
                     if (definition[1]?.doc_url) {
                         docFile = await fetch(definition[1]?.doc_url).then((res) => res.json()).catch(() => null);
                     } else if (baseAa) {
-                        const baseAaDefinition = await socket.api.getDefinition(baseAa);
+                        let baseAaDefinition;
+
+                        if (isHttp) {
+                            baseAaDefinition = await httpClient.getDefinition(baseAa);
+                        } else {
+                            baseAaDefinition = await socket.api.getDefinition(baseAa);
+                        }
 
                         if (baseAaDefinition[0] && baseAaDefinition[0] === "autonomous agent" && baseAaDefinition[1]?.doc_url) {
                             docFile = await fetch(baseAaDefinition[1]?.doc_url).then((res) => res.json()).catch(() => null);
