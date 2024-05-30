@@ -235,7 +235,7 @@ export const getData: ThunkActionWithArguments = (firstCall: boolean = false, is
 
   const state = getState() as IStore;
 
-  if (firstCall && state.active && symbols[state.active].currentAsset) {
+  if (firstCall && state.active && symbols[state.active] && symbols[state.active].currentAsset) {
     dispatch(addIssuer(symbols[state.active].currentAsset, isHttp));
   }
 };
