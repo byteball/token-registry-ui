@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Alert } from "antd";
 
 import { MainLayout } from "components/MainLayout/MainLayout";
 import { HeadInfo } from "./components/HeadInfo/HeadInfo";
@@ -25,7 +26,6 @@ import { changeActiveSymbol } from "../../store/actions/active/changeActiveSymbo
 import historyInstance from "../../historyInstance";
 import { AddWalletAddressModal } from "../../modals/AddWalletAddressModal/AddWalletAddressModal";
 import { WithdrawModal } from "../../modals/WithdrawModal/WithdrawModal";
-import { Alert } from "antd";
 import { addWalletOpen } from "../../store/actions/modals/addWallet";
 export interface IMainParams {
   symbol: string;
@@ -64,7 +64,19 @@ export const MainPage: React.FC = () => {
   return (
     <MainLayout>
       <Helmet>
-        <title>Obyte Token Registry | {tokenInfo?.symbol || ""} — {tokenInfo?.currentDescription || "No description"}</title>
+        <title>{getPageTitle(tokenInfo?.symbol, tokenInfo?.currentDescription)}</title>
+        <meta name="description" content={getPageDescription(tokenInfo?.symbol, tokenInfo?.currentDescription)} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tokens.ooo" />
+
+        <meta property="og:description" content={getPageDescription(tokenInfo?.symbol, tokenInfo?.currentDescription)} />
+
+        <meta name="twitter:title" content={getPageTitle(tokenInfo?.symbol, tokenInfo?.currentDescription)} />
+        <meta name="twitter:url" content="https://tokens.ooo/" />
+        <meta name="twitter:site" content="@ObyteOrg" />
+
+        <meta name="twitter:description" content={getPageDescription(tokenInfo?.symbol, tokenInfo?.currentDescription)} />
       </Helmet>
 
       {!activeWallet && (
@@ -154,4 +166,26 @@ export const MainPage: React.FC = () => {
       )}
     </MainLayout>
   );
+};
+
+export const getPageTitle = (tokenSymbol: string | undefined, tokenDescription: string | undefined) => {
+  let title = "Obyte Token Registry";
+
+  if (tokenSymbol) {
+    title += ` | ${tokenSymbol}`;
+  }
+
+  if (tokenDescription) {
+    title += ` — ${tokenDescription}`;
+  }
+
+  return title;
+};
+
+export const getPageDescription = (tokenSymbol: string | undefined, tokenDescription: string | undefined) => {
+  if (!tokenSymbol || !tokenDescription) {
+    return "Name registry for Obyte tokens";
+  } else {
+    return tokenDescription;
+  }
 };
