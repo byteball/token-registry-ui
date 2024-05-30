@@ -27,7 +27,7 @@ export const HeadInfo: React.FC<IHeadInfo> = ({
         <div>
           <a
             target="_blank" rel="noopener"
-            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
+            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/${asset}`}
           >
             View current asset on explorer
           </a>

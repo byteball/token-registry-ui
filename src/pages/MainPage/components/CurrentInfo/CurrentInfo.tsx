@@ -77,7 +77,7 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
           }}>
             <a
               target="_blank" rel="noopener"
-              href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
+              href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/${asset}`}
             >
               {asset}
             </a>
