@@ -11,7 +11,7 @@ export const AppRouter: React.FC = () => {
   
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(getData(true, botCheck()));
   }, [dispatch]);
 

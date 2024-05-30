@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 import { MainLayout } from "components/MainLayout/MainLayout";
 import { HeadInfo } from "./components/HeadInfo/HeadInfo";
@@ -62,6 +63,10 @@ export const MainPage: React.FC = () => {
 
   return (
     <MainLayout>
+      <Helmet>
+        <title>Obyte Token Registry | {tokenInfo?.symbol || ""} — {tokenInfo?.currentDescription || "No description"}</title>
+      </Helmet>
+
       {!activeWallet && (
         <Alert
           message="To have more features in the app add your wallet address"
