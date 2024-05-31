@@ -23,11 +23,11 @@ export const HeadInfo: React.FC<IHeadInfo> = ({
   return (
     <div className={styles.headInfo}>
       <div className={styles.symbolWrap}>
-        <div className={styles.symbol}>{symbol}</div>
+        <h1 className={styles.symbol}>{symbol}</h1>
         <div>
           <a
             target="_blank" rel="noopener"
-            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/?#${asset}`}
+            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/${asset}`}
           >
             View current asset on explorer
           </a>

@@ -6,19 +6,27 @@ import { addIssuer } from "../issuers/addIssuer";
 import { botCheck } from "utils/botCheck";
 
 export const changeActiveSymbol: ThunkActionWithArguments = (
-  symbol: string
+  symbol: string | null
 ) => async (dispatch, getState) => {
-  historyInstance.replace("/" + symbol);
+  if (!symbol) {
+    historyInstance.push("/");
+    dispatch({
+      type: CHANGE_ACTIVE_SYMBOL,
+      payload: null,
+    });
+  } else {
+    historyInstance.replace("/" + symbol);
 
-  const store = getState() as IStore;
-  const asset = store?.data?.symbols?.[symbol]?.currentAsset;
+    const store = getState() as IStore;
+    const asset = store?.data?.symbols?.[symbol]?.currentAsset;
 
-  dispatch({
-    type: CHANGE_ACTIVE_SYMBOL,
-    payload: symbol,
-  });
+    dispatch({
+      type: CHANGE_ACTIVE_SYMBOL,
+      payload: symbol,
+    });
 
-  if (asset) {
-    dispatch(addIssuer(asset, botCheck()));
+    if (asset) {
+      dispatch(addIssuer(asset, botCheck()));
+    }
   }
 };
