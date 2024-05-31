@@ -115,9 +115,9 @@ export const ChangeInfo: React.FC<IChangeInfo> = ({
           justifyContent: "space-between",
         }}
       >
-        <div style={{ fontSize: 26 }}>
-          Voting for the description and decimals
-        </div>
+        <h2 style={{ fontSize: 26 }}>
+          Voting for the description and decimals of {currentSymbol}
+        </h2>
         <div>
           <Button
             type="link"
