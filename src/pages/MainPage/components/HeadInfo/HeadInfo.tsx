@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HeadInfo.module.css";
-import { Statistic } from "antd";
+import { Space, Statistic } from "antd";
 import config from "config";
 
 const { Countdown } = Statistic;
@@ -24,14 +24,20 @@ export const HeadInfo: React.FC<IHeadInfo> = ({
     <div className={styles.headInfo}>
       <div className={styles.symbolWrap}>
         <h1 className={styles.symbol}>{symbol}</h1>
-        <div>
+        <Space size="large" style={{ flexWrap: "wrap" }} direction="horizontal">
           <a
             target="_blank" rel="noopener"
             href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/${asset}`}
           >
-            View current asset on explorer
+            View asset definition on explorer
           </a>
-        </div>
+          <a
+            target="_blank" rel="noopener"
+            href={`https://${config.TESTNET ? "testnet" : ""}explorer.obyte.org/asset/${symbol}`}
+          >
+            View token info on explorer
+          </a>
+        </Space>
       </div>
       {status === "dispute" && time !== null && (
         <div className={styles.disputeTimeWrap}>

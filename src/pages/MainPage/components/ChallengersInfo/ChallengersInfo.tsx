@@ -161,7 +161,7 @@ export const ChallengersInfo: React.FC<IChallengersInfo> = ({
           alignItems: "center",
         }}
       >
-        <div style={{ fontSize: 26 }}>All symbol-asset connections</div>
+        <h2 style={{ fontSize: 26 }}>All symbol-asset connections</h2>
         {widthWindow && widthWindow < 800 && (
           <div>
             <Button
