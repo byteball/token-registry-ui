@@ -73,7 +73,7 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                         docFileInfo.homepage_url = docFile.homepage_url;
                         docFileInfo.source_url = docFile.source_url;
 
-                        if (config.PREDICTION_MARKET_BASE_AAS.includes(baseAa)) {
+                        if (config.PREDICTION_MARKET_BASE_AAS.includes(baseAa) && !config.TESTNET) {
                             const marketData = await fetch(`https://prophet.ooo/api/market/${author}`).then(data => data.json()).catch(() => null);
 
                             if (marketData) {
