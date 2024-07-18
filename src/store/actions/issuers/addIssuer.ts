@@ -1,7 +1,10 @@
 import { IStore } from "store/reducers/index.interface";
+import { IMeta } from "store/reducers/issuers.interface";
+
 import { ThunkActionWithArguments } from "./../index.interface";
 import { ADD_ISSUER_INFO } from "../../types/issuers";
 import httpClient from "services/httpClient";
+import config from "config";
 
 interface IDocFileInfo {
     description?: string;
@@ -41,6 +44,7 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                 }
 
                 let docFile;
+                let meta: IMeta = {};
 
                 if (definition[0] && definition[0] === "autonomous agent") {
                     let address: string = author;
@@ -69,9 +73,18 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                         docFileInfo.homepage_url = docFile.homepage_url;
                         docFileInfo.source_url = docFile.source_url;
 
+                        if (config.PREDICTION_MARKET_BASE_AAS.includes(baseAa)) {
+                            const marketData = await fetch(`https://prophet.ooo/api/market/${author}`).then(data => data.json()).catch(() => null);
+
+                            if (marketData) {
+                                meta.issuerLink = marketData.marketUrl;
+                                meta.issuerLabel = `${docFile.description}: ${marketData.eventText}`;
+                            }
+                        }
+
                         dispatch({
                             type: ADD_ISSUER_INFO,
-                            payload: { asset, ts: Date.now(), issuerInfo: { address, homepage_url: docFile.homepage_url, description: docFile.description, source_url: docFile.source_url, isAa: true } },
+                            payload: { asset, ts: Date.now(), issuerInfo: { address, homepage_url: docFile.homepage_url, description: docFile.description, source_url: docFile.source_url, meta, isAa: true } },
                         });
                     }
                 } else {
