@@ -43,8 +43,8 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                     definition = await socket.api.getDefinition(author);
                 }
 
-                let docFile;
                 let meta: IMeta = {};
+                let getDocFileGetter = null;
 
                 if (definition[0] && definition[0] === "autonomous agent") {
                     let address: string = author;
@@ -52,7 +52,7 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                     const baseAa = definition[1].base_aa;
 
                     if (definition[1]?.doc_url) {
-                        docFile = await fetch(definition[1]?.doc_url).then((res) => res.json()).catch(() => null);
+                        getDocFileGetter = fetch(definition[1]?.doc_url).then((res) => res.json()).catch(() => null);
                     } else if (baseAa) {
                         let baseAaDefinition;
 
@@ -63,24 +63,36 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                         }
 
                         if (baseAaDefinition[0] && baseAaDefinition[0] === "autonomous agent" && baseAaDefinition[1]?.doc_url) {
-                            docFile = await fetch(baseAaDefinition[1]?.doc_url).then((res) => res.json()).catch(() => null);
+                            getDocFileGetter = fetch(baseAaDefinition[1]?.doc_url)
+                                .then((res) => res.json())
+                                .catch(() => null);
+
                             address = baseAa;
                         }
                     }
+
+                    const metaGetters = [];
+
+                    if (config.PREDICTION_MARKET_BASE_AAS.includes(baseAa) && !config.TESTNET) {
+
+                        metaGetters.push(
+                            fetch(`https://prophet.ooo/api/market/${author}`)
+                                .then(async (data) => {
+                                    const marketData = await data.json();
+
+                                    meta.viewLink = marketData.marketUrl;
+                                    meta.viewLabel = `Prophet prediction markets: ${marketData.eventText}`;
+                                })
+                                .catch(() => null)
+                        );
+                    }
+
+                    const [docFile] = await Promise.all([getDocFileGetter, ...metaGetters]);
 
                     if (docFile) {
                         docFileInfo.description = docFile.description;
                         docFileInfo.homepage_url = docFile.homepage_url;
                         docFileInfo.source_url = docFile.source_url;
-
-                        if (config.PREDICTION_MARKET_BASE_AAS.includes(baseAa) && !config.TESTNET) {
-                            const marketData = await fetch(`https://prophet.ooo/api/market/${author}`).then(data => data.json()).catch(() => null);
-
-                            if (marketData) {
-                                meta.issuerLink = marketData.marketUrl;
-                                meta.issuerLabel = `${docFile.description}: ${marketData.eventText}`;
-                            }
-                        }
 
                         dispatch({
                             type: ADD_ISSUER_INFO,

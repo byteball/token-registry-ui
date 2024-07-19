@@ -3,8 +3,8 @@ export interface IIssuersStore {
 }
 
 export interface IMeta {
-    issuerLink?: string;
-    issuerLabel?: string;
+    viewLink?: string;
+    viewLabel?: string;
 }
 
 export interface IIssuersStoreItem extends IIssuer {
