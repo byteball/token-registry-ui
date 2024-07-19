@@ -89,7 +89,7 @@ export const CurrentInfo: React.FC<ICurrentInfo> = ({
 
       {issuer ? <>
         {issuer.isAa && <>
-          {issuer.homepage_url ? <div><b>Asset issuer website:</b>{" "}
+          {issuer.homepage_url ? <div className={styles.issuerWrap}><b>Asset issuer website:</b>{" "}
             <a target="_blank" rel="noopener" href={issuer?.meta?.viewLink || issuer.homepage_url}
             >
               {issuer?.meta?.viewLabel || issuer.description || issuer.address}
