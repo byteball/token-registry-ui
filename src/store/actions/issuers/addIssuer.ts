@@ -45,9 +45,9 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
 
                 let meta: IMeta = {};
                 let getDocFileGetter = null;
+                let address: string = author;
 
                 if (definition[0] && definition[0] === "autonomous agent") {
-                    let address: string = author;
 
                     const baseAa = definition[1].base_aa;
 
@@ -66,8 +66,6 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                             getDocFileGetter = fetch(baseAaDefinition[1]?.doc_url)
                                 .then((res) => res.json())
                                 .catch(() => null);
-
-                            address = baseAa;
                         }
                     }
 
@@ -78,10 +76,12 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                         metaGetters.push(
                             fetch(`https://prophet.ooo/api/market/${author}`)
                                 .then(async (data) => {
-                                    const marketData = await data.json();
+                                    const marketData = await data.json().catch(() => null);
 
-                                    meta.viewLink = marketData.marketUrl;
-                                    meta.viewLabel = `Prophet prediction markets: ${marketData.eventText}`;
+                                    if (marketData && !("error" in marketData)) {
+                                        meta.viewLink = marketData.marketUrl;
+                                        meta.viewLabel = `Prophet prediction markets: ${marketData.eventText}`;
+                                    }
                                 })
                                 .catch(() => null)
                         );
@@ -98,11 +98,16 @@ export const addIssuer: ThunkActionWithArguments = (asset: string, isHttp = fals
                             type: ADD_ISSUER_INFO,
                             payload: { asset, ts: Date.now(), issuerInfo: { address, homepage_url: docFile.homepage_url, description: docFile.description, source_url: docFile.source_url, meta, isAa: true } },
                         });
+                    } else {
+                        dispatch({
+                            type: ADD_ISSUER_INFO,
+                            payload: { asset, ts: Date.now(), issuerInfo: { address, meta, isAa: true } },
+                        });
                     }
                 } else {
                     dispatch({
                         type: ADD_ISSUER_INFO,
-                        payload: { asset, issuerInfo: { address: author, isAa: false }, ts: Date.now() },
+                        payload: { asset, issuerInfo: { address, isAa: false }, ts: Date.now() },
                     });
                 }
             }
