@@ -1,3 +1,5 @@
+import config from "config";
+
 class Client {
     hubAddress: string;
     request: (path: string, body: any) => Promise<any>;
@@ -69,5 +71,5 @@ class Client {
 
 
 export default new Client({
-  testnet: false
+  testnet: config.TESTNET
 });
