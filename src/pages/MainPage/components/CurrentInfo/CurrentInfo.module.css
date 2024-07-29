@@ -1,8 +1,16 @@
-.currentInfo{
+.currentInfo {
     margin-top: 18px;
     font-size: 16px;
 }
 
-.currentInfo a{
+.currentInfo a {
     word-break: break-all;
+}
+
+.currentInfo .issuerWrap a {
+    word-break: break-word;
+}
+
+.issuerWrap {
+    max-width: 700px;
 }
