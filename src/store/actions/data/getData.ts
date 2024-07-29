@@ -72,6 +72,7 @@ export const getData: ThunkActionWithArguments = (firstCall: boolean = false, is
       type: LOAD_DATA_FAILURE,
     });
   }
+
   const assets: IAssets = {};
   const descriptions: IDescriptions = {};
   const symbols: ISymbols = {};
