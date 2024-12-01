@@ -19,7 +19,7 @@
     "history": "^4.10.1",
     "lodash.padend": "^4.6.1",
     "lodash.throttle": "^4.1.1",
-    "moment": "^2.25.3",
+    "moment": "^2.29.2",
     "obyte": "^0.1.8",
     "obyte-qr-button": "0.0.15",
     "react": "^16.13.1",
